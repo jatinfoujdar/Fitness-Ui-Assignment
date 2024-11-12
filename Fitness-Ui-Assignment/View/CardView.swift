@@ -32,8 +32,8 @@ struct CardImageView: View {
             .overlay(
                 VStack(alignment: .leading){
                     HStack {
-                        Text("Next")
-                            .font(.title3)
+                        Text("Next:")
+                            .font(.title2)
                             .foregroundColor(.white)
                             .padding(.top, topPadding)
                         Text("Fitness Course")

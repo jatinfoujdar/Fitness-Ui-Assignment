@@ -5,11 +5,11 @@ struct TitleView: View {
         VStack(alignment: .leading,spacing: 30) {
             Text("Fitness Courses")
                 .font(.system(size: 35, weight: .bold, design: .default))
-                .foregroundColor(.black)
+                .foregroundColor(.white)
               
             Text("Your Active Lessons")
-                .font(.system(size: 20, weight: .bold, design: .default))
-                .foregroundColor(.black)
+                .font(.system(size: 15, weight: .bold, design: .default))
+                .foregroundColor(.white)
              
         }
         
