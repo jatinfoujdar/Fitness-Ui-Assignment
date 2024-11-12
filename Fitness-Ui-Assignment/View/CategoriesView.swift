@@ -9,8 +9,14 @@ import SwiftUI
 
 struct CategoriesView: View {
     var body: some View {
-        Text("Categories")
+        VStack(alignment: .leading){
+            Text("Categories")
+                .font(.title3)
+                .fontWeight(.bold)
             
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
