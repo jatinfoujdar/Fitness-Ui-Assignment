@@ -9,11 +9,8 @@ struct CardView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 1) {
                     CardImageView(imageName: "gym", topPadding: 150)
-
-                
                     CardImageView(imageName: "gym", topPadding: 150)
                 }
-                
             }
         }
     }
@@ -26,11 +23,16 @@ struct CardImageView: View {
     var body: some View {
         Image(imageName)
             .resizable()
+            .scaledToFill()
             .frame(width: 320, height: 400)
             .cornerRadius(20)
-            .padding()
             .overlay(
-                VStack(alignment: .leading){
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.white, lineWidth: 5)
+            )
+            .padding() 
+            .overlay(
+                VStack(alignment: .leading) {
                     HStack {
                         Text("Next:")
                             .font(.title2)
@@ -42,14 +44,13 @@ struct CardImageView: View {
                             .foregroundColor(.white)
                             .padding(.top, topPadding)
                     }
-                    Text("A Fit like is great life")
+                    Text("A Fit life is a great life")
                         .font(.subheadline)
                         .foregroundColor(.white)
                 }
                 .padding(.leading, 30)
                 .frame(maxWidth: .infinity, alignment: .leading)
             )
-           
     }
 }
 
