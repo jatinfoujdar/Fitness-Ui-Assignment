@@ -30,7 +30,7 @@ struct CardImageView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.white, lineWidth: 5)
             )
-            .padding() 
+            .padding()
             .overlay(
                 VStack(alignment: .leading) {
                     HStack {
@@ -47,12 +47,36 @@ struct CardImageView: View {
                     Text("A Fit life is a great life")
                         .font(.subheadline)
                         .foregroundColor(.white)
+                    
+                   
+                    Capsule()
+                        .fill(Color(red: 0.204, green: 0.216, blue: 0.247))
+                        .frame(width: 150, height: 40)
+                        .overlay(
+                            HStack {
+                                Image(systemName: "book.fill")
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 5)
+                                Text(" Continue")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 5)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.white, lineWidth: 2)
+                        )
+                        .padding(.top, 20)
                 }
                 .padding(.leading, 30)
                 .frame(maxWidth: .infinity, alignment: .leading)
             )
     }
 }
+
+
 
 #Preview {
     CardView()

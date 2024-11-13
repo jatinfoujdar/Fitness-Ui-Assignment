@@ -30,7 +30,7 @@ struct CategoriesView: View {
                             } else {
                                
                                 Capsule()
-                                    .fill(self.selectedCategory == category.0 ? Color.black : Color.black.opacity(0.2))
+                                    .fill(self.selectedCategory == category.0 ? Color.black : Color.white)
                                     .frame(height: 80)
                             }
                             
@@ -40,7 +40,7 @@ struct CategoriesView: View {
                                     Text(emoji)
                                         .font(.title)
                                         .padding(20)
-                                        .background(Circle().fill(self.selectedCategory == category.0 ? Color.white : Color.blue))
+                                        .background(Circle().fill(self.selectedCategory == category.0 ? Color.white : Color.gray))
                                         .foregroundColor(self.selectedCategory == category.0 ? .black : .white)
                                         .padding(.leading, 4)
                                 } else {
@@ -49,11 +49,7 @@ struct CategoriesView: View {
                                         Circle()
                                             .fill(self.selectedCategory == category.0 ? Color.white : Color.blue)
                                             .frame(width: 30, height: 30)
-                                            .overlay(
-                                                Text("🌐")
-                                                    .font(.title)
-                                                    .foregroundColor(self.selectedCategory == category.0 ? .black : .white)
-                                            )
+                                           
                                     }
                                 }
                                 

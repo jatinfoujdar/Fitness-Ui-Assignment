@@ -8,7 +8,7 @@ struct ContentView: View {
                        .frame(height: UIScreen.main.bounds.height / 2)
                        .edgesIgnoringSafeArea(.top)
                    
-                   Color.white
+                   Color(red: 171 / 255.0, green: 212 / 255.0, blue: 212 / 255.0)
                        .frame(height: UIScreen.main.bounds.height / 2)
                        .edgesIgnoringSafeArea(.bottom)
                }
