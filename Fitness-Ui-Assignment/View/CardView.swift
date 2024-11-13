@@ -49,7 +49,7 @@ struct CardImageView: View {
                 .padding(.leading, 30)
                 .frame(maxWidth: .infinity, alignment: .leading)
             )
-            .padding(.bottom, 200)
+           
     }
 }
 

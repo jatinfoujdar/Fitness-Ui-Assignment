@@ -15,8 +15,10 @@ struct ContentView: View {
                
                VStack {
                    CardView()
-                       .padding(.top, 40)
+                   CategoriesView()
+                
                }
+              
            }
            .edgesIgnoringSafeArea(.all)
        }
