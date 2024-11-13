@@ -8,7 +8,6 @@ struct CategoriesView: View {
         ("Body Building", "💪")
     ]
     
-    
     @State private var selectedCategory: String? = nil
     
     var body: some View {
@@ -43,7 +42,7 @@ struct CategoriesView: View {
                                         .padding(20)
                                         .background(Circle().fill(self.selectedCategory == category.0 ? Color.white : Color.blue))
                                         .foregroundColor(self.selectedCategory == category.0 ? .black : .white)
-                                        .padding(.leading, 4) 
+                                        .padding(.leading, 4)
                                 } else {
                                     
                                     if category.0 == "All" {
@@ -69,7 +68,6 @@ struct CategoriesView: View {
                             }
                         }
                         .onTapGesture {
-                 
                             self.selectedCategory = category.0
                         }
                         .padding(.vertical, 5)
@@ -77,9 +75,16 @@ struct CategoriesView: View {
                 }
                 .padding(.leading)
             }
+       
             
+            if let selectedCategory = selectedCategory, selectedCategory != "All" {
+                Text("\(selectedCategory) selected")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                    .padding(.top, 20)
+                    .padding([.leading, .trailing])
+            }
         }
-        
     }
 }
 
