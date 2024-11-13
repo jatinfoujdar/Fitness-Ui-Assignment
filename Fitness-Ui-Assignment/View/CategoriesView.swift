@@ -78,7 +78,7 @@ struct CategoriesView: View {
                     .font(.headline)
                     .foregroundColor(.gray)
                     .padding(.top, 20)
-                    .padding([.leading, .trailing])
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
         }
     }
