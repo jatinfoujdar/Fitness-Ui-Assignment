@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = ContentViewModel()
+    
     var body: some View {
            ZStack {
                VStack(spacing: 0) {
@@ -13,12 +15,20 @@ struct ContentView: View {
                        .edgesIgnoringSafeArea(.bottom)
                }
                
-               VStack {
-                   CardView()
-                   CategoriesView()
-                
+               if viewModel.isLoading {
+                   ProgressView()
+                       .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                       .scaleEffect(2)
+               } else {
+                   ScrollView {
+                       VStack(spacing: 20) {
+                           ForEach(viewModel.components) { component in
+                               ComponentFactory.build(component: component)
+                           }
+                       }
+                       .padding(.top, 60) // Spacing for safe area
+                   }
                }
-              
            }
            .edgesIgnoringSafeArea(.all)
        }

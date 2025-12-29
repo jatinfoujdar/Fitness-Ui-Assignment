@@ -1,15 +1,17 @@
 import SwiftUI
 
 struct CardView: View {
+    let courses: [CourseModel]
+    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 0) {
-            TitleView()
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 1) {
-                    CardImageView(imageName: "gym", topPadding: 150)
-                    CardImageView(imageName: "gym", topPadding: 150)
+                    ForEach(courses) { course in
+                        CardImageView(course: course, topPadding: 150)
+                    }
                 }
             }
         }
@@ -17,11 +19,11 @@ struct CardView: View {
 }
 
 struct CardImageView: View {
-    var imageName: String
+    var course: CourseModel
     var topPadding: CGFloat
     
     var body: some View {
-        Image(imageName)
+        Image(course.image)
             .resizable()
             .scaledToFill()
             .frame(width: 320, height: 400)
@@ -38,13 +40,13 @@ struct CardImageView: View {
                             .font(.title2)
                             .foregroundColor(.white)
                             .padding(.top, topPadding)
-                        Text("Fitness Course")
+                        Text(course.title)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                             .padding(.top, topPadding)
                     }
-                    Text("A Fit life is a great life")
+                    Text(course.subTitle)
                         .font(.subheadline)
                         .foregroundColor(.white)
                     
@@ -79,5 +81,5 @@ struct CardImageView: View {
 
 
 #Preview {
-    CardView()
+    CardView(courses: [CourseModel(title: "Fitness Course", subTitle: "A Fit life is a great life", image: "gym")])
 }
