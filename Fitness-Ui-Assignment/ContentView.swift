@@ -26,7 +26,7 @@ struct ContentView: View {
                                ComponentFactory.build(component: component)
                            }
                        }
-                       .padding(.top, 60) // Spacing for safe area
+                       .padding(.top, 60) 
                    }
                }
            }

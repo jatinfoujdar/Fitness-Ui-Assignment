@@ -3,6 +3,7 @@ import SwiftUI
 enum ComponentType: String, Codable {
     case titleSection = "title_section"
     case courseCarousel = "course_carousel"
+    case carousel = "carousel" // Support user's alias
     case categoryList = "category_list"
 }
 
@@ -21,12 +22,19 @@ struct UIComponent: Codable, Identifiable {
 }
 
 struct ComponentContent: Codable {
-    // Title Section Fields
+    // Title/Header for sections
     let header: String?
     let subHeader: String?
+    let title: String? // Support user's naming
     
     // Course Carousel Fields
     let courses: [CourseModel]?
+    let dataSource: String? // Match user's 'data_source' if needed
+    
+    enum CodingKeys: String, CodingKey {
+        case header, subHeader, title, courses, categories
+        case dataSource = "data_source"
+    }
     
     // Category List Fields
     let categories: [CategoryModel]?

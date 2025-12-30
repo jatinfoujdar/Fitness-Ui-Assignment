@@ -9,10 +9,11 @@ struct ComponentFactory {
                let subHeader = component.content.subHeader {
                 TitleView(header: header, subHeader: subHeader)
             }
-        case .courseCarousel:
-            if let courses = component.content.courses {
-                CardView(courses: courses)
-            }
+        case .courseCarousel, .carousel:
+            CardView(
+                title: component.content.title,
+                courses: component.content.courses ?? []
+            )
         case .categoryList:
             if let categories = component.content.categories {
                 CategoriesView(categories: categories)

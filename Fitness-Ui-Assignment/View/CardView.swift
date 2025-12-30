@@ -1,16 +1,30 @@
 import SwiftUI
 
 struct CardView: View {
+    let title: String?
     let courses: [CourseModel]
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 10) {
+            if let title = title {
+                Text(title)
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .foregroundColor(.white)
+                    .padding(.leading)
+                    .padding(.top, 10)
+            }
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 1) {
-                    ForEach(courses) { course in
-                        CardImageView(course: course, topPadding: 150)
+            if courses.isEmpty {
+                Text("No courses added yet.")
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 1) {
+                        ForEach(courses) { course in
+                            CardImageView(course: course, topPadding: 150)
+                        }
                     }
                 }
             }
@@ -81,5 +95,5 @@ struct CardImageView: View {
 
 
 #Preview {
-    CardView(courses: [CourseModel(title: "Fitness Course", subTitle: "A Fit life is a great life", image: "gym")])
+    CardView(title: "Gut Friendly Courses", courses: [CourseModel(title: "Fitness Course", subTitle: "A Fit life is a great life", image: "gym")])
 }

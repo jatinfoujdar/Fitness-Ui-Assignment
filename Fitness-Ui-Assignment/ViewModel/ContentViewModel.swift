@@ -1,54 +1,52 @@
 import SwiftUI
 import Combine
+import FirebaseFirestore
 
 class ContentViewModel: ObservableObject {
     @Published var components: [UIComponent] = []
     @Published var isLoading = true
     
+    private var db = Firestore.firestore()
+    private var listener: ListenerRegistration?
+
     init() {
         fetchSDUIData()
     }
     
     func fetchSDUIData() {
-        // Simulating a Firebase Firestore fetch
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.components = [
-                UIComponent(
-                    type: .titleSection,
-                    content: ComponentContent(
-                        header: "Fitness Courses",
-                        subHeader: "Your Active Lessons",
-                        courses: nil,
-                        categories: nil
-                    )
-                ),
-                UIComponent(
-                    type: .courseCarousel,
-                    content: ComponentContent(
-                        header: nil,
-                        subHeader: nil,
-                        courses: [
-                            CourseModel(title: "Fitness Course", subTitle: "A Fit life is a great life", image: "gym"),
-                            CourseModel(title: "Advanced Gym", subTitle: "Push your limits", image: "gym")
-                        ],
-                        categories: nil
-                    )
-                ),
-                UIComponent(
-                    type: .categoryList,
-                    content: ComponentContent(
-                        header: nil,
-                        subHeader: nil,
-                        courses: nil,
-                        categories: [
-                            CategoryModel(name: "Heart Attack", emoji: "💔"),
-                            CategoryModel(name: "Body Building", emoji: "💪"),
-                            CategoryModel(name: "Yoga", emoji: "🧘‍♀️")
-                        ]
-                    )
-                )
-            ]
-            self.isLoading = false
+        // Real-time listener from Firebase Firestore
+        listener = db.collection("layouts").document("home_screen").addSnapshotListener { [weak self] documentSnapshot, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error fetching document: \(error)")
+                self.isLoading = false
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists,
+                  let data = document.data() else {
+                print("Document does not exist or is empty")
+                self.isLoading = false
+                return
+            }
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                let decodedResponse = try JSONDecoder().decode(SDUIResponse.self, from: jsonData)
+                
+                DispatchQueue.main.async {
+                    self.components = decodedResponse.components
+                    self.isLoading = false
+                }
+            } catch {
+                print("Error decoding SDUI data: \(error)")
+                self.isLoading = false
+            }
         }
+    }
+    
+    deinit {
+        listener?.remove()
     }
 }
